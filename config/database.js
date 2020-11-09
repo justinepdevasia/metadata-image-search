@@ -1,5 +1,5 @@
 // config/database.js
-export default {
+module.exports = {
     'url' : 'mongodb://mongo:27017' 
 };
 
