@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const session = require('express-session');
 const lodash = require('lodash')
 const app = express();
+const dbPath = require('./config/database.js');
+const dummyData= require('./public/database/mongodata/data')
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -18,7 +20,7 @@ app.use(session({
     saveUninitialized: false
   }));
 
-mongoose.connect("mongodb://localhost:27017/userDB", {useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect(dbPath.url1, {useNewUrlParser: true,useUnifiedTopology: true});
 
 const userSchema = {
     username:String,
@@ -99,8 +101,47 @@ app.post("/login",function(req,res){
             }
             
         }
-    })   
-    
+    }) 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // This part of the code add dummy data  present in  public/database/mongodata/data.js to the mongodb when a user login for the first time
+
+    ImageCollection.find({},function(err,foundImage){
+
+        if(err){
+            console.log(err);
+        }
+        else{
+            if(foundImage.length==0){
+                console.log("dummy data")
+                // console.log(dummyData);
+
+
+                dummyData.map(function (image){
+                    const newImage = new ImageCollection(image);
+                    newImage.save(function (err) {
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            console.log("saved dummy data in database");
+                        }
+                    })
+                })
+                
+
+   
+            }
+            else{
+                console.log("database contains images ... so not adding any dummy data");
+            }
+
+        }
+
+
+    });
+
+    ////////////////////////// end of dummy data saving ///////////////////////////////
+   
 
 });
 
@@ -110,29 +151,7 @@ app.post("/imagedata",function(req,res){
 
     const searchdata = lodash.pickBy(req.body);
 
-    // const imageName = req.body.name;
-    // const width = req.body.width;
-    // const height = req.body.height;
 
-    // const ImageData = new ImageCollection({
-    //     name:imageName,
-    //     width:width,
-    //     height:height
-    // })
-
-    // console.log(camera);
-
-    // const NewImagedata = new ImageCollection({
-    //     camera:camera
-    // })
-    // NewImagedata.save(function (err) {
-    //     if(err){
-    //         console.log(err);
-    //     }
-    //     else{
-    //         res.send("Data Added");
-    //     }
-    // })
 
     console.log("request body contains")
     console.log(searchdata);
