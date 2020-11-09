@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const session = require('express-session');
 const lodash = require('lodash')
 const app = express();
+const dbPath = require('./config/database.js');
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -18,7 +19,7 @@ app.use(session({
     saveUninitialized: false
   }));
 
-mongoose.connect("mongodb://localhost:27017/userDB", {useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect(dbPath.url, {useNewUrlParser: true,useUnifiedTopology: true});
 
 const userSchema = {
     username:String,
