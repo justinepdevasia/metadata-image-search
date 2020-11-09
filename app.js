@@ -7,6 +7,7 @@ const lodash = require('lodash')
 const app = express();
 const dbPath = require('./config/database.js');
 const dummyData= require('./public/database/mongodata/data')
+require('dotenv').config()
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -20,7 +21,8 @@ app.use(session({
     saveUninitialized: false
   }));
 
-mongoose.connect(dbPath.url1, {useNewUrlParser: true,useUnifiedTopology: true});
+
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true,useUnifiedTopology: true});
 
 const userSchema = {
     username:String,
@@ -199,6 +201,7 @@ app.post("/imagedata",function(req,res){
 
 
 
-app.listen(8080, function() {
-    console.log("Server started on port 8080.");
+app.listen(80, function() {
+    console.log("Server started on port 80.");
   });
+
