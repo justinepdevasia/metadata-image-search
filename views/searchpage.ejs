@@ -1,0 +1,66 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron text-center">
+  <div class="container">
+    
+    <h1 class="display-3">Search Your Favourite Image</h1>
+    
+    <form action="/imagedata" method="POST" class="image-search-form">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCamera">Camera</label>
+          <select id="inputCamera" class="form-control" name="camera">
+            <!-- <option selected>Choose...</option> -->
+            <option selected value="">Choose...</option>
+            <option value="NIKON">NIKON</option>
+            <option value="CANON">CANON</option>
+            <option value="SONY">SONY</option>
+            <option value="FUJIFILM">FUJIFILM</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputISO">ISO</label>
+          <input type="text" class="form-control" id="inputISO" placeholder="" name="iso">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputResolution">Resolution</label>
+          <input type="text" class="form-control" id="inputResolution" placeholder="" name="resolution">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputExposure">Exposure</label>
+          <input type="text" class="form-control" id="inputExposure" placeholder="" name="exposure">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck" name="gps">
+          <label class="form-check-label" for="gridCheck">
+            GPS
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-dark btn-lg">Search</button>
+      <a class="btn btn-danger btn-lg" href="/logout" role="button">Log Out</a>  
+    </form>
+    
+
+
+    
+
+    
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<%- include('partials/footer') %>

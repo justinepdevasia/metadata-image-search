@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <br><br>
+    <h1 class="display-3 "> ............... Your Search Result</h1> 
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <% images.forEach((image) => { %>
+          <a href="#"><img src="<%= image.url %>" width="456",height="456" class="image-details"></a>
+        <% }) %>
+      </div>
+    </div>   
+</div>
+<br><br>
+<hr>
+<%- include('partials/footer') %>
+
