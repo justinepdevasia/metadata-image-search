@@ -19,7 +19,14 @@
               <input type="password" class="form-control" name="password">
             </div>
             <button type="submit" class="btn btn-dark">Login</button>
-           
+            <% if (data.password === "wrong" ) { %>
+              <p style="color: red;padding-top: 5%;">wrong password</p>
+            <% } %>
+            <% if (data.user === "not" ) { %>
+             <p style="color: red;padding-top: 5%;">user not found</p>
+            <% } %>
+
+            
           </form>
 
         </div>

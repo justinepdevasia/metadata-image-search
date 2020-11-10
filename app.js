@@ -140,11 +140,17 @@ app.post("/login",function(req,res){
                 }
                 else{
                     console.log("wrong password");
+                    res.render("invalid",{
+                        data:{password:"wrong"}
+                    });
                 }
                 
             }
             else{
                 console.log("user not found");
+                res.render("invalid",{
+                    data:{user:"not"}
+                });
             }
             
         }
