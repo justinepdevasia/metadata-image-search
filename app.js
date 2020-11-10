@@ -34,7 +34,10 @@ const ImageSchema = {
     camera:String,
     iso:Number,
     resolution:Number,
-    exposure:Number,
+    exposure:String,
+    version:String,
+    flash:String,
+    gps:String
 
 }
 
@@ -42,6 +45,48 @@ const ImageSchema = {
 const ImageCollection = new mongoose.model("Images",ImageSchema);
 const User = new mongoose.model("Users",userSchema);
 
+
+
+
+
+
+// This part of the code add dummy data  present in  public/database/mongodata/data.js to the mongodb when a user login for the first time
+
+ImageCollection.find({},function(err,foundImage){
+
+        if(err){
+            console.log(err);
+        }
+        else{
+            if(foundImage.length==0){
+                console.log("dummy data")
+                // console.log(dummyData);
+
+
+                dummyData.map(function (image){
+                    const newImage = new ImageCollection(image);
+                    newImage.save(function (err) {
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            console.log("saved dummy data in database");
+                        }
+                    })
+                })
+                
+
+   
+            }
+            else{
+                console.log("database contains images ... so not adding any dummy data");
+            }
+
+        }
+
+
+});
+////////////////////////// end of dummy data saving ///////////////////////////////
 
 ///////////////////////////////////////////////////////////
 app.get("/",function(req,res){
@@ -105,44 +150,6 @@ app.post("/login",function(req,res){
         }
     }) 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // This part of the code add dummy data  present in  public/database/mongodata/data.js to the mongodb when a user login for the first time
-
-    ImageCollection.find({},function(err,foundImage){
-
-        if(err){
-            console.log(err);
-        }
-        else{
-            if(foundImage.length==0){
-                console.log("dummy data")
-                // console.log(dummyData);
-
-
-                dummyData.map(function (image){
-                    const newImage = new ImageCollection(image);
-                    newImage.save(function (err) {
-                        if(err){
-                            console.log(err);
-                        }
-                        else{
-                            console.log("saved dummy data in database");
-                        }
-                    })
-                })
-                
-
-   
-            }
-            else{
-                console.log("database contains images ... so not adding any dummy data");
-            }
-
-        }
-
-
-    });
-
-    ////////////////////////// end of dummy data saving ///////////////////////////////
    
 
 });
