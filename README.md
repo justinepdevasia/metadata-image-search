@@ -15,3 +15,7 @@ You can run using Docker Compose:
 ```console
 $ docker-compose up -d
 ```
+![shot1](readme-docs/shot1.png)
+![shot2](readme-docs/shot2.png)
+![shot2](readme-docs/shot3.png)
+
